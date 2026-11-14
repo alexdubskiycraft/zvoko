@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Вхід — Zvoko{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center my-4">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+        <div class="card bg-dark text-light border-secondary shadow-lg">
+            <!-- Жовта акцентна смуга зверху картки -->
+            <div class="card-header border-warning text-center bg-black py-3" style="border-top: 3px solid #ffc107;">
+                <h3 class="card-title text-warning fw-bold mb-0">Вхід</h3>
+            </div>
+            
+            <div class="card-body p-4">
+                <form method="post" class="needs-validation">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.username.id_for_label }}" class="form-label text-warning fw-semibold">
+                            Ім'я користувача
+                        </label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                            <div class="text-danger small mt-1">{{ form.username.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.password.id_for_label }}" class="form-label text-warning fw-semibold">
+                            Пароль
+                        </label>
+                        {{ form.password }}
+                        {% if form.password.errors %}
+                            <div class="text-danger small mt-1">{{ form.password.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger py-2 small mb-3">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                    <button type="submit" class="btn btn-warning text-dark fw-bold w-100 py-2">
+                        Увійти
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Стилізація стандартних інпутів Django під темну тему */
+    .card-body input[type="text"],
+    .card-body input[type="password"] {
+        background-color: #121212;
+        border: 1px solid #444;
+        color: #ffffff;
+        border-radius: 6px;
+        padding: 0.5rem 0.75rem;
+        width: 100%;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card-body input[type="text"]:focus,
+    .card-body input[type="password"]:focus {
+        background-color: #121212;
+        color: #ffffff;
+        border-color: #ffc107;
+        box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+        outline: none;
+    }
+</style>
+{% endblock %}

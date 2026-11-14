@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Zvoko - купуй та куштуй =){% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    
+    <style>
+        /* Чорно-жовта стилізація */
+        body {
+            background-color: #121212;
+            color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Навбар */
+        .navbar-custom {
+            background-color: #000000;
+            border-bottom: 2px solid #ffc107;
+        }
+
+        .navbar-brand-custom {
+            color: #ffc107 !important;
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-link-custom {
+            color: #ffffff !important;
+            font-weight: 500;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .nav-link-custom:hover {
+            color: #ffc107 !important;
+        }
+
+        /* Основний блок контенту */
+        main.content-container {
+            background-color: #1e1e1e;
+            border: 1px solid #333333;
+            border-top: 3px solid #ffc107;
+            color: #e0e0e0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Підвал */
+        .footer-custom {
+            background-color: #000000;
+            border-top: 1px solid #333333;
+            color: #ffc107;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid container">
+            <a class="navbar-brand navbar-brand-custom" href="/">
+                <img src="/media/base/ZvokoLogo.png" alt="Zvoko" width="90px">
+            </a>
+            <button class="navbar-toggler border-warning" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="{% url 'category_list' %}">Категорії товарів</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="container my-4 p-4 rounded content-container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-custom text-center py-3 mt-4">
+       Zvoko shop @ 2026
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} — Zvoko{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{% url 'product_list' cat=product.category.id %}" class="btn btn-outline-warning btn-sm">
+        &larr; Назад до товарів категорії
+    </a>
+</div>
+
+<div class="card bg-dark text-light border-secondary shadow-lg overflow-hidden">
+    <div class="border-top border-warning border-3"></div>
+
+    <div class="card-body p-4 p-md-5">
+        <div class="row g-4 align-items-start">
+            <div class="col-12 col-md-5 col-lg-6 d-flex justify-content-center">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="img-fluid rounded border border-secondary product-detail-img" alt="{{ product.name }}">
+                {% else %}
+                    <div class="product-detail-img-placeholder rounded border border-secondary d-flex align-items-center justify-content-center bg-black text-secondary w-100">
+                        <span class="fs-5">Зображення відсутнє</span>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="col-12 col-md-7 col-lg-6 d-flex flex-column">
+
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    {% if product.brand %}
+                        <span class="badge bg-warning text-dark text-uppercase fw-bold">
+                            {{ product.brand }}
+                        </span>
+                    {% endif %}
+                    <span class="badge bg-secondary text-light">
+                        {{ product.category.name }}
+                    </span>
+                </div>
+
+                <h1 class="display-6 text-warning fw-bold mb-3">{{ product.name }}</h1>
+
+                <div class="p-3 mb-4 rounded bg-black border border-secondary d-flex justify-content-between align-items-center">
+                    <div>
+                        <small class="text-secondary d-block">Ціна:</small>
+                        <span class="fs-2 fw-bold text-warning">{{ product.price }} грн</span>
+                    </div>
+                    <div>
+                        {% if product.quantity > 0 %}
+                            <span class="badge bg-success fs-6 py-2 px-3">В наявності ({{ product.quantity }} шт.)</span>
+                        {% else %}
+                            <span class="badge bg-danger fs-6 py-2 px-3">Немає в наявності</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="mb-4 flex-grow-1">
+                    <h5 class="text-warning border-bottom border-secondary pb-2 mb-3">Опис товару</h5>
+                    <p class="text-light leading-relaxed fs-6" style="white-space: pre-line;">
+                        {{ product.description }}
+                    </p>
+                </div>
+
+                <div class="row g-2 mb-4 text-secondary small border-top border-secondary pt-3">
+                    <div class="col-6">
+                        <span>Додано: {{ product.created_at|date:"d.m.Y" }}</span>
+                    </div>
+                    <div class="col-6 text-end">
+                        <span>Пріоритет: {{ product.priority }}</span>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-warning text-dark fw-bold btn-lg py-3" {% if product.quantity == 0 %}disabled{% endif %}>
+                        {% if product.quantity > 0 %}
+                            Додати в кошик / Купити
+                        {% else %}
+                            Товар розпродано
+                        {% endif %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .product-detail-img {
+        width: auto;              /* Автоматична ширина за пропорціями */
+        max-width: 100%;          /* Щоб картинка не виходила за межі контейнера */
+        height: auto;             /* Реальна висота */
+        max-height: 500px;        /* Максимальне обмеження висоти, щоб не розтягувати сторінку */
+        object-fit: contain;      /* Відображає об'єкт повністю без обрізання */
+    }
+    .product-detail-img-placeholder {
+        height: 350px;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,59 @@
+/* Загальні кольори */
+:root {
+    --primary-yellow: #f1c40f;   /* насичений жовтий */
+    --dark-gray: #2c3e50;        /* глибокий сірий */
+    --light-gray: #ecf0f1;       /* світлий фон */
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--dark-gray);
+}
+
+.navbar-brand {
+    color: var(--primary-yellow) !important;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: var(--light-gray) !important;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-yellow) !important;
+}
+
+/* Основний контейнер */
+main.container {
+    background-color: var(--light-gray);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--dark-gray);
+    color: var(--primary-yellow);
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+/* Кнопки */
+.btn-primary {
+    background-color: var(--primary-yellow);
+    border: none;
+    color: var(--dark-gray);
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #d4ac0d;
+    color: #fff;
+}
+
+/* Заголовки */
+h1, h2, h3, h4 {
+    color: var(--dark-gray);
+}
