@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Реєстрація — Zvoko{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center my-3">
+    <div class="col-md-6 col-lg-5">
+        <div class="card card-zvoko shadow">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4 fw-bold" style="color: #ffc107;">Створити акаунт</h2>
+                
+                <form method="post" class="zvoko-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-zvoko w-100 mt-2 py-2">Зареєструватися</button>
+                </form>
+
+                <div class="text-center mt-3 pt-3 border-top border-secondary">
+                    <small class="text-secondary">
+                        Вже маєте акаунт? 
+                        <a href="{% url 'login' %}" class="text-warning text-decoration-none fw-semibold">Увійти</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

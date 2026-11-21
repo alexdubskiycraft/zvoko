@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from shop.models import *
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
+
 
 class CategoryList(ListView):
     model = Category
@@ -31,5 +33,10 @@ class ProductDetail(DetailView):
     slug_field = "id"
     slug_url_kwarg = "slug"       
 
-    
+
+
+
+
+
+
 
