@@ -70,13 +70,24 @@
                 </div>
 
                 <div class="d-grid gap-2">
-                    <button class="btn btn-warning text-dark fw-bold btn-lg py-3" {% if product.quantity == 0 %}disabled{% endif %}>
-                        {% if product.quantity > 0 %}
-                            Додати в кошик / Купити
-                        {% else %}
-                            Товар розпродано
-                        {% endif %}
-                    </button>
+                    <form action="{% url 'add_to_cart' %}" method="post">
+                        {% csrf_token %}
+
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <input type="hidden" name="quantity" value="1">
+
+                        <button
+                            type="submit"
+                            class="btn btn-warning text-dark fw-bold btn-lg py-3"
+                            {% if product.quantity <= 0 %}disabled{% endif %}
+                        >
+                            {% if product.quantity > 0 %}
+                                Додати в кошик / Купити
+                            {% else %}
+                                Товар розпродано
+                            {% endif %}
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

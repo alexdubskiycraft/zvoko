@@ -54,9 +54,20 @@
                         {% endif %}
                     </div>
 
-                    <button class="btn btn-warning text-dark fw-bold w-100 mt-3" {% if product.quantity == 0 %}disabled{% endif %}>
-                        Купити
-                    </button>
+                    <form action="{% url 'add_to_cart' %}" method="post">
+                        {% csrf_token %}
+                        
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <input type="hidden" name="quantity" value="1">
+
+                        <button
+                            type="submit"
+                            class="btn btn-warning text-dark fw-bold w-100 mt-3"
+                            {% if product.quantity <= 0 %}disabled{% endif %}
+                        >
+                            Купити
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

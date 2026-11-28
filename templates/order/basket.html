@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+
+{% block title %}Кошик — Zvoko{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-warning">
+    <h2 class="text-warning fw-bold mb-0">
+        🛒 Мій кошик
+    </h2>
+
+    <span class="badge bg-warning text-dark fs-6">
+        {{ items|length }} товар(ів)
+    </span>
+</div>
+
+{% if items %}
+
+<div class="row">
+
+    <div class="col-lg-8">
+
+        {% for item in items %}
+        <div class="card bg-dark border-secondary shadow-sm mb-3 cart-card">
+
+            <div class="card-body">
+
+                <div class="row align-items-center">
+
+                    <div class="col-md-2 text-center">
+                        {% if item.product.image %}
+                            <img
+                                src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}"
+                                class="img-fluid cart-img"
+                            >
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-5">
+                        <h5 class="text-warning fw-bold mb-1">
+                            {{ item.product.name }}
+                        </h5>
+
+                        <p class="text-secondary mb-0">
+                            {{ item.product.description|truncatewords:15 }}
+                        </p>
+                    </div>
+
+                    <div class="col-md-2 text-center">
+                        <small class="text-secondary d-block">
+                            Ціна
+                        </small>
+
+                        <span class="text-warning fw-bold fs-5">
+                            {{ item.product.price }} грн
+                        </span>
+                    </div>
+
+                    <div class="col-md-3 text-center">
+
+                        <small class="text-secondary d-block mb-2">
+                            Кількість
+                        </small>
+
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+
+                            <a href="#"
+                               class="btn btn-outline-warning btn-sm">
+                                -
+                            </a>
+
+                            <span class="badge bg-warning text-dark px-3 py-2">
+                                {{ item.quantity }}
+                            </span>
+
+                            <a href="#"
+                               class="btn btn-outline-warning btn-sm">
+                                +
+                            </a>
+
+                        </div>
+
+                        <div class="mt-2">
+
+                            <span class="text-success fw-bold">
+                                {{ item.product.price }} × {{ item.quantity }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="card bg-dark border-warning shadow-lg sticky-top">
+
+            <div class="card-body">
+
+                <h4 class="text-warning mb-4">
+                    Підсумок
+                </h4>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="text-light">
+                        Товарів
+                    </span>
+
+                    <span class="fw-bold text-warning">
+                        {{ items|length }}
+                    </span>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span class="text-light">
+                        Доставка
+                    </span>
+
+                    <span class="text-success">
+                        Безкоштовно
+                    </span>
+                </div>
+
+                <hr class="border-secondary">
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+
+                    <span class="fs-5 text-light">
+                        Разом
+                    </span>
+
+                    <span class="fs-3 text-warning fw-bold">
+                        {{ total_price }} грн
+                    </span>
+
+                </div>
+
+                <button class="btn btn-warning text-dark fw-bold w-100 py-3">
+                    Оформити замовлення
+                </button>
+
+                <a href="{% url 'category_list' %}"
+                   class="btn btn-outline-warning w-100 mt-2">
+                    Продовжити покупки
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<div class="text-center py-5">
+
+    <div class="display-1 mb-3">
+        🛒
+    </div>
+
+    <h3 class="text-warning">
+        Кошик порожній
+    </h3>
+
+    <p class="text-secondary">
+        Додайте товари до кошика та повертайтеся сюди для оформлення замовлення.
+    </p>
+
+    <a href="{% url 'category_list' %}"
+       class="btn btn-warning text-dark fw-bold">
+        Перейти до покупок
+    </a>
+
+</div>
+
+{% endif %}
+
+<style>
+
+.cart-card{
+    transition: .25s;
+}
+
+.cart-card:hover{
+    border-color:#ffc107 !important;
+    transform:translateY(-3px);
+}
+
+.cart-img{
+    max-height:100px;
+    object-fit:contain;
+}
+
+.sticky-top{
+    top:20px;
+}
+
+</style>
+
+{% endblock %}

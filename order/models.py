@@ -6,7 +6,11 @@ from shop.models import Product
 class Basket(models.Model):
     quantity = models.IntegerField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="baskets")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="users")    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="users") 
+
+    @property
+    def total_price(self):
+        return self.product.price * self.quantity       
 
 class Order(models.Model):
     class PaymentMethod(models.TextChoices):
